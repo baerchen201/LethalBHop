@@ -27,7 +27,7 @@ public class LethalBHop : BaseUnityPlugin
     public ConfigEntry<float> friction = null!;
     public float Friction => friction.Value;
     public ConfigEntry<float> maxspeed = null!;
-    public float Maxspeed => maxspeed.Value;
+    public float MaxSpeed => maxspeed.Value;
     public ConfigEntry<float> movespeed = null!;
     public float MoveSpeed => movespeed.Value;
     public ConfigEntry<float> accelerate = null!;
@@ -36,6 +36,8 @@ public class LethalBHop : BaseUnityPlugin
     public float AirAccelerate => airaccelerate.Value;
     public ConfigEntry<float> stopspeed = null!;
     public float StopSpeed => stopspeed.Value;
+    public ConfigEntry<float> jumpvelocity = null!;
+    public float JumpVelocity => jumpvelocity.Value;
 
     #endregion
 
@@ -68,18 +70,29 @@ public class LethalBHop : BaseUnityPlugin
             "Disables the speed cap."
         );
 
-        gravity = Config.Bind(SECTION_MOVEVARS, "Gravity", 800.0f, "Gravity.");
-        friction = Config.Bind(SECTION_MOVEVARS, "Friction", 4.0f, "Ground friction.");
-        maxspeed = Config.Bind(SECTION_MOVEVARS, "Max Speed", 320.0f, "Max speed per tick.");
+        gravity = Config.Bind(SECTION_MOVEVARS, nameof(Gravity), 800.0f, "Gravity.");
+        friction = Config.Bind(SECTION_MOVEVARS, nameof(Friction), 4.0f, "Ground friction.");
+        maxspeed = Config.Bind(SECTION_MOVEVARS, nameof(MaxSpeed), 320.0f, "Max speed per tick.");
         movespeed = Config.Bind(
             SECTION_MOVEVARS,
-            "Move Speed",
+            nameof(MoveSpeed),
             250.0f,
             "Ground speed (like cl_forwardspeed etc.)."
         );
-        accelerate = Config.Bind(SECTION_MOVEVARS, "Accelerate", 10.0f, "Ground acceleration.");
-        airaccelerate = Config.Bind(SECTION_MOVEVARS, "Air Accelerate", 20.0f, "Air acceleration.");
-        stopspeed = Config.Bind(SECTION_MOVEVARS, "Stop Speed", 75.0f, "Ground deceleration.");
+        accelerate = Config.Bind(
+            SECTION_MOVEVARS,
+            nameof(Accelerate),
+            10.0f,
+            "Ground acceleration."
+        );
+        airaccelerate = Config.Bind(
+            SECTION_MOVEVARS,
+            nameof(AirAccelerate),
+            20.0f,
+            "Air acceleration."
+        );
+        stopspeed = Config.Bind(SECTION_MOVEVARS, nameof(StopSpeed), 75.0f, "Ground deceleration.");
+        jumpvelocity = Config.Bind(SECTION_MOVEVARS, nameof(JumpVelocity), 295.0f, "Jump height.");
 
         Config.SettingChanged += UpdateConfigs;
         UpdateConfigs(null!, null!);
@@ -100,10 +113,11 @@ public class LethalBHop : BaseUnityPlugin
 
         CPMPlayer.gravity = Gravity;
         CPMPlayer.friction = Friction;
-        CPMPlayer.maxspeed = Maxspeed;
+        CPMPlayer.maxspeed = MaxSpeed;
         CPMPlayer.movespeed = MoveSpeed;
         CPMPlayer.accelerate = Accelerate;
         CPMPlayer.airaccelerate = AirAccelerate;
         CPMPlayer.stopspeed = StopSpeed;
+        CPMPlayer.jumpvelocity = JumpVelocity;
     }
 }

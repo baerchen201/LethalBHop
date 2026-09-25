@@ -31,6 +31,7 @@ public class CPMPlayer : MonoBehaviour
     internal static float accelerate; // Ground acceleration
     internal static float airaccelerate; // Air acceleration
     internal static float stopspeed; // Ground deceleration
+    internal static float jumpvelocity; // Jump height
 
     // Contains the command the user wishes upon the character
     struct Cmd
@@ -289,7 +290,7 @@ public class CPMPlayer : MonoBehaviour
 
         if (wishJump)
         {
-            velocity.y = 295;
+            velocity.y = jumpvelocity;
 
             player.PlayJumpAudio();
             player.PlayerJumpedServerRpc();
