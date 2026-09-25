@@ -140,20 +140,57 @@ public class CPMPlayer : MonoBehaviour
             if (!compass)
             {
 #if DEBUG
-                LethalBHop.Logger.LogDebug(" - Obtaining speedometer object");
+                LethalBHop.Logger.LogDebug(" - Cloning speedometer object");
 #endif
-                compass = GameObject.Find(
-                    "/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/Compass"
-                );
-                speedo = compass.GetComponentInChildren<TextMeshProUGUI>();
-            }
-            if (!compass)
-            {
-                LethalBHop.Logger.LogWarning(
-                    "Speedometer object is null, temporarily disabling speedometer"
-                );
-                speedometer = false;
-                return;
+
+                GameObject canvas,
+                    original;
+                if (!(canvas = GameObject.Find("/Systems/UI/Canvas/IngamePlayerHUD")))
+                {
+                    LethalBHop.Logger.LogWarning(
+                        "Speedometer canvas is null, temporarily disabling speedometer"
+                    );
+                    speedometer = false;
+                    return;
+                }
+                if (
+                    !(
+                        original = GameObject.Find(
+                            "/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/Compass"
+                        )
+                    )
+                )
+                {
+                    LethalBHop.Logger.LogWarning(
+                        "Speedometer object is null, temporarily disabling speedometer"
+                    );
+                    speedometer = false;
+                    return;
+                }
+                if (
+                    !(
+                        speedo = (
+                            compass = Instantiate(original)
+                        ).GetComponentInChildren<TextMeshProUGUI>()
+                    )
+                )
+                {
+                    LethalBHop.Logger.LogWarning(
+                        "Speedometer text object is null, temporarily disabling speedometer"
+                    );
+                    speedometer = false;
+                    Destroy(compass);
+                    return;
+                }
+
+                RectTransform transform;
+                (transform = (RectTransform)compass.transform).SetParent(canvas.transform, false);
+                transform.offsetMin = transform.offsetMax = Vector2.zero;
+                transform.pivot =
+                    transform.anchorMin =
+                    transform.anchorMax =
+                        new Vector2(0.5f, 0.5f);
+                // this is not perfectly centered and its pmo but i'm also lazy
             }
 
             compass.SetActive(true);
@@ -170,6 +207,11 @@ public class CPMPlayer : MonoBehaviour
             if (compass)
                 compass.SetActive(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(compass);
     }
 
     /*******************************************************************************************************\
