@@ -1,0 +1,10 @@
+{
+  "name": "LethalBHop",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/baerchen201/LethalBHop",
+  "description": "Bhop mod featuring real Bhop movement in Lethal Company",
+  "dependencies": [
+    "BepInEx-BepInExPack-5.4.2305",
+    "baer1-LethalModUtils-1.0.1"
+  ]
+}
