@@ -15,28 +15,28 @@ public class LethalBHop : BaseUnityPlugin
     #region Configs
 
 
-    public ConfigEntry<bool> autobhop = null!;
+    private ConfigEntry<bool> autobhop = null!;
     public bool AutoBhop => autobhop.Value;
-    public ConfigEntry<bool> speedometer = null!;
+    private ConfigEntry<bool> speedometer = null!;
     public bool Speedometer => speedometer.Value;
-    public ConfigEntry<bool> enablebunnyhopping = null!;
+    private ConfigEntry<bool> enablebunnyhopping = null!;
     public bool EnableBunnyHopping => enablebunnyhopping.Value;
 
-    public ConfigEntry<float> gravity = null!;
+    private ConfigEntry<float> gravity = null!;
     public float Gravity => gravity.Value;
-    public ConfigEntry<float> friction = null!;
+    private ConfigEntry<float> friction = null!;
     public float Friction => friction.Value;
-    public ConfigEntry<float> maxspeed = null!;
+    private ConfigEntry<float> maxspeed = null!;
     public float MaxSpeed => maxspeed.Value;
-    public ConfigEntry<float> movespeed = null!;
+    private ConfigEntry<float> movespeed = null!;
     public float MoveSpeed => movespeed.Value;
-    public ConfigEntry<float> accelerate = null!;
+    private ConfigEntry<float> accelerate = null!;
     public float Accelerate => accelerate.Value;
-    public ConfigEntry<float> airaccelerate = null!;
+    private ConfigEntry<float> airaccelerate = null!;
     public float AirAccelerate => airaccelerate.Value;
-    public ConfigEntry<float> stopspeed = null!;
+    private ConfigEntry<float> stopspeed = null!;
     public float StopSpeed => stopspeed.Value;
-    public ConfigEntry<float> jumpvelocity = null!;
+    private ConfigEntry<float> jumpvelocity = null!;
     public float JumpVelocity => jumpvelocity.Value;
 
     #endregion
