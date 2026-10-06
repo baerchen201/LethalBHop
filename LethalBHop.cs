@@ -21,6 +21,8 @@ public class LethalBHop : BaseUnityPlugin
     public bool Speedometer => speedometer.Value;
     private ConfigEntry<bool> enablebunnyhopping = null!;
     public bool EnableBunnyHopping => enablebunnyhopping.Value;
+    private ConfigEntry<bool> stoponteleport = null!;
+    public bool StopOnTeleport => stoponteleport.Value;
 
     private ConfigEntry<float> gravity = null!;
     public float Gravity => gravity.Value;
@@ -68,6 +70,12 @@ public class LethalBHop : BaseUnityPlugin
             nameof(EnableBunnyHopping),
             true,
             "Disables the speed cap."
+        );
+        stoponteleport = Config.Bind(
+            SECTION_GENERAL,
+            nameof(StopOnTeleport),
+            true,
+            "Nullifies your speed when you get teleported (Teleporter, Entrances, Respawning, etc.)."
         );
 
         gravity = Config.Bind(SECTION_MOVEVARS, nameof(Gravity), 800.0f, "Gravity.");

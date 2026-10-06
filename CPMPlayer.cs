@@ -46,7 +46,7 @@ public class CPMPlayer : MonoBehaviour
     public PlayerControllerB player = null!;
     private CharacterController _controller = null!;
 
-    private Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
 
     internal bool wishJump = false;
 
