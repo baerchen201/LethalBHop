@@ -40,6 +40,8 @@ public class LethalBHop : BaseUnityPlugin
     public float StopSpeed => stopspeed.Value;
     private ConfigEntry<float> jumpvelocity = null!;
     public float JumpVelocity => jumpvelocity.Value;
+    private ConfigEntry<float> maxwishspeed = null!;
+    public float MaxWishSpeed => maxwishspeed.Value;
 
     #endregion
 
@@ -101,6 +103,12 @@ public class LethalBHop : BaseUnityPlugin
         );
         stopspeed = Config.Bind(SECTION_MOVEVARS, nameof(StopSpeed), 75.0f, "Ground deceleration.");
         jumpvelocity = Config.Bind(SECTION_MOVEVARS, nameof(JumpVelocity), 295.0f, "Jump height.");
+        maxwishspeed = Config.Bind(
+            SECTION_MOVEVARS,
+            nameof(MaxWishSpeed),
+            30.0f,
+            "wishspd clamp value."
+        );
 
         Config.SettingChanged += UpdateConfigs;
         UpdateConfigs(null!, null!);
@@ -127,5 +135,6 @@ public class LethalBHop : BaseUnityPlugin
         CPMPlayer.airaccelerate = AirAccelerate;
         CPMPlayer.stopspeed = StopSpeed;
         CPMPlayer.jumpvelocity = JumpVelocity;
+        CPMPlayer.maxwishspeed = MaxWishSpeed;
     }
 }

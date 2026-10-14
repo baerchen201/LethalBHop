@@ -32,6 +32,7 @@ public class CPMPlayer : MonoBehaviour
     internal static float airaccelerate; // Air acceleration
     internal static float stopspeed; // Ground deceleration
     internal static float jumpvelocity; // Jump height
+    internal static float maxwishspeed; // wishspd clamp value
 
     // Contains the command the user wishes upon the character
     struct Cmd
@@ -415,8 +416,8 @@ public class CPMPlayer : MonoBehaviour
         float currentspeed;
         float wishspd = wishspeed;
 
-        if (wishspd > 30)
-            wishspd = 30;
+        if (wishspd > maxwishspeed)
+            wishspd = maxwishspeed;
 
         currentspeed = Vector3.Dot(velocity, wishdir);
 
