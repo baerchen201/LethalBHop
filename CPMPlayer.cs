@@ -101,11 +101,11 @@ public class CPMPlayer : MonoBehaviour
             return;
         }
 
-        // Don't patch movement on ladders
-        if (player.isClimbingLadder)
+        // Don't patch movement on ladders and when using jetpacks (kinda buggy rn but idc)
+        if (player.isClimbingLadder || (player.jetpackControls && !player.disablingJetpackControls))
         {
 #if DEBUG
-            LethalBHop.Logger.LogDebug($"<< {nameof(Update)} on ladder");
+            LethalBHop.Logger.LogDebug($"<< {nameof(Update)} on ladder or using jetpack");
 #endif
             CharacterController_Move.allowMove = true;
             return;
